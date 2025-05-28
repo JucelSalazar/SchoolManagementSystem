@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jucel\\OneDrive\\Documents\\Activity 7\\SchoolManagementSystem\\SchoolManagementSystem.csproj": {}
+    "C:\\Users\\jucel\\SchoolManagementSystem\\SchoolManagementSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jucel\\OneDrive\\Documents\\Activity 7\\SchoolManagementSystem\\SchoolManagementSystem.csproj": {
+    "C:\\Users\\jucel\\SchoolManagementSystem\\SchoolManagementSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jucel\\OneDrive\\Documents\\Activity 7\\SchoolManagementSystem\\SchoolManagementSystem.csproj",
+        "projectUniqueName": "C:\\Users\\jucel\\SchoolManagementSystem\\SchoolManagementSystem.csproj",
         "projectName": "SchoolManagementSystem",
-        "projectPath": "C:\\Users\\jucel\\OneDrive\\Documents\\Activity 7\\SchoolManagementSystem\\SchoolManagementSystem.csproj",
+        "projectPath": "C:\\Users\\jucel\\SchoolManagementSystem\\SchoolManagementSystem.csproj",
         "packagesPath": "C:\\Users\\jucel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jucel\\OneDrive\\Documents\\Activity 7\\SchoolManagementSystem\\obj\\",
+        "outputPath": "C:\\Users\\jucel\\SchoolManagementSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jucel\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -44,6 +44,10 @@
         "net9.0-windows7.0": {
           "targetAlias": "net9.0-windows",
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[6.0.1, )"
@@ -51,6 +55,14 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[9.0.4, )"
+            },
+            "Microsoft.Office.Interop.Excel": {
+              "target": "Package",
+              "version": "[15.0.4795.1001, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[9.3.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
