@@ -1,6 +1,9 @@
 using System;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Net.Mail;
+using System.Net;
+
 
 namespace SchoolManagementSystem
 {
@@ -31,7 +34,7 @@ namespace SchoolManagementSystem
         private void btnSendReset_Click(object sender, EventArgs e)
         {
             string email = txtEmail.Text;
-            string token = Guid.NewGuid().ToString(); 
+            string token = Guid.NewGuid().ToString();
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -40,11 +43,49 @@ namespace SchoolManagementSystem
                 cmd.Parameters.AddWithValue("@Token", token);
                 cmd.Parameters.AddWithValue("@Email", email);
                 conn.Open();
-                cmd.ExecuteNonQuery();
+                int rowsAffected = cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Password reset link has been sent to your email.");
-                this.Close();
+                if (rowsAffected > 0)
+                {
+                    try
+                    {
+                        SendResetEmail(email, token);
+                        MessageBox.Show("Password reset link has been sent to your email.");
+
+                        FormResetPassword resetForm = new FormResetPassword();
+                        resetForm.ShowDialog();
+
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error sending email: " + ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Email not found.");
+                }
             }
+}
+
+        private void SendResetEmail(string toEmail, string token)
+        {
+            string fromEmail = "jucelastig@gmail.com";
+            string password = "fsti bzsy zjiy jymu";
+
+            string subject = "Password Reset Request";
+            string body = $"Use the following token to reset your password:\n\n{token}";
+
+            MailMessage message = new MailMessage(fromEmail, toEmail, subject, body);
+
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential(fromEmail, password),
+                EnableSsl = true
+            };
+
+            smtp.Send(message);
         }
     }
 }

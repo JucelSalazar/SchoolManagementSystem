@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using OfficeOpenXml;
 using System.IO;
+using System.Net.Mail;
+using System.Net;
 
 namespace SchoolManagementSystem
 {
@@ -72,7 +74,7 @@ namespace SchoolManagementSystem
             btnDeleteStudent = new Button { Text = "Delete Student", Location = new System.Drawing.Point(240, 230), Width = 100 };
             btnDeleteStudent.Click += btnDeleteStudent_Click;
 
-            btnExport = new Button { Text = "Export to Excel", Location = new System.Drawing.Point(350, 230), Width = 150 }; // ✅ Consistent styling
+            btnExport = new Button { Text = "Export to Excel", Location = new System.Drawing.Point(350, 230), Width = 150 };
             btnExport.Click += btnExport_Click;
 
             this.Controls.AddRange(new Control[]
@@ -168,25 +170,6 @@ namespace SchoolManagementSystem
                         MessageBox.Show("Invalid username or password.");
                     }
                 }
-            }
-        }
-
-        private void btnSendResetEmail_Click(object sender, EventArgs e)
-        {
-            string email = txtEmail.Text;
-            string token = Guid.NewGuid().ToString();
-
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                string query = "UPDATE Users SET ResetToken=@Token WHERE Email=@Email";
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Token", token);
-                cmd.Parameters.AddWithValue("@Email", email);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-
-                MessageBox.Show("Password reset link has been sent to your email.");
-                // Send email logic here
             }
         }
 
